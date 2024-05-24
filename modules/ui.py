@@ -237,7 +237,12 @@ def ordered_ui_categories():
 
 
 def create_override_settings_dropdown(tabname, row):
-    dropdown = gr.Dropdown([], label="Override settings", visible=False, elem_id=f"{tabname}_override_settings", multiselect=True)
+    checkpoints = shared_items.list_checkpoint_tiles(shared.opts.sd_checkpoint_dropdown_use_short)
+    choices = []
+    for ckpt in checkpoints:
+        choices.append(f"Model:{ckpt}")
+        
+    dropdown = gr.Dropdown(choices, label="Override settings", visible=True, elem_id=f"{tabname}_override_settings", multiselect=False)
 
     dropdown.change(
         fn=lambda x: gr.Dropdown.update(visible=bool(x)),

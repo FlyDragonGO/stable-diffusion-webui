@@ -386,7 +386,7 @@ Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 965400086, Size: 512x512, Model
 
 
 infotext_to_setting_name_mapping = [
-
+    ('Model', 'sd_model_checkpoint'),
 ]
 """Mapping of infotext labels to setting names. Only left for backwards compatibility - use OptionInfo(..., infotext='...') instead.
 Example content:
