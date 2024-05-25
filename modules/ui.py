@@ -242,7 +242,7 @@ def create_override_settings_dropdown(tabname, row):
     for ckpt in checkpoints:
         choices.append(f"Model:{ckpt}")
         
-    dropdown = gr.Dropdown(choices, label="Override settings", visible=True, elem_id=f"{tabname}_override_settings", multiselect=True)
+    dropdown = gr.Dropdown(choices, label="模型选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=True)
 
     dropdown.change(
         fn=lambda x: gr.Dropdown.update(visible=bool(x)),
