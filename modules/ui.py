@@ -244,11 +244,11 @@ def create_override_settings_dropdown(tabname, row):
         
     dropdown = gr.Dropdown(choices, label="模型选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=True)
 
-    dropdown.change(
-        fn=lambda x: gr.Dropdown.update(visible=bool(x)),
-        inputs=[dropdown],
-        outputs=[dropdown],
-    )
+    # dropdown.change(
+    #     fn=lambda x: gr.Dropdown.update(visible=bool(x)),
+    #     inputs=[dropdown],
+    #     outputs=[dropdown],
+    # )
 
     return dropdown
 
