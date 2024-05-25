@@ -412,27 +412,10 @@ def create_override_settings_dict(text_pairs):
 
     if text_pairs is None or text_pairs == '':
         return {}
-    text_pairs = [text_pairs]
 
-    res = {}
-
-    params = {}
-    for pair in text_pairs:
-        k, v = pair.split(":", maxsplit=1)
-
-        params[k] = v.strip()
-
-    mapping = [(info.infotext, k) for k, info in shared.opts.data_labels.items() if info.infotext]
-    for param_name, setting_name in mapping + infotext_to_setting_name_mapping:
-        value = params.get(param_name, None)
-
-        if value is None:
-            continue
-
-        res[setting_name] = shared.opts.cast_value(setting_name, value)
-
-    return res
-
+    return {
+        'sd_model_checkpoint': text_pairs
+    }
 
 def get_override_settings(params, *, skip_fields=None):
     """Returns a list of settings overrides from the infotext parameters dictionary.

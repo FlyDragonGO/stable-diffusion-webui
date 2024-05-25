@@ -240,7 +240,7 @@ def create_override_settings_dropdown(tabname, row):
     checkpoints = shared_items.list_checkpoint_tiles(shared.opts.sd_checkpoint_dropdown_use_short)
     choices = []
     for ckpt in checkpoints:
-        choices.append(f"Model:{ckpt}")
+        choices.append(ckpt)
         
     dropdown = gr.Dropdown(choices, label="模型选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=False)
 
