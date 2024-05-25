@@ -410,6 +410,10 @@ def create_override_settings_dict(text_pairs):
         {'CLIP_stop_at_last_layers': 2, 'sd_model_checkpoint': 'e6e99610c4', 'eta_noise_seed_delta': 31337}
     """
 
+    if text_pairs is None or text_pairs == '':
+        return {}
+    text_pairs = [text_pairs]
+
     res = {}
 
     params = {}
