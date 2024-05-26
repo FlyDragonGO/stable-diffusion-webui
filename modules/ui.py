@@ -248,19 +248,15 @@ def create_vae_select_dropdown(tabname, row):
 
 
 def create_override_settings_dropdown(tabname, row):
-    checkpoints = shared_items.list_checkpoint_tiles(shared.opts.sd_checkpoint_dropdown_use_short)
-    vaes = shared_items.sd_vae_items()
+    dropdown = gr.Dropdown([], label="Override settings", visible=False, elem_id=f"{tabname}_override_settings", multiselect=True)
 
-    with FormRow(elem_id=tabname + '_inner_row') as row:
-        dropdown_vae = gr.Dropdown(vaes, label="VAE选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=False)
+    dropdown.change(
+        fn=lambda x: gr.Dropdown.update(visible=bool(x)),
+        inputs=[dropdown],
+        outputs=[dropdown],
+    )
 
-    # dropdown.change(
-    #     fn=lambda x: gr.Dropdown.update(visible=bool(x)),
-    #     inputs=[dropdown],
-    #     outputs=[dropdown],
-    # )
-
-    return row
+    return dropdown
 
 
 def create_ui():

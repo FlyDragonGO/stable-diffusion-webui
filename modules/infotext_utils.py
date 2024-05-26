@@ -386,7 +386,7 @@ Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 965400086, Size: 512x512, Model
 
 
 infotext_to_setting_name_mapping = [
-    ('Model', 'sd_model_checkpoint'),
+
 ]
 """Mapping of infotext labels to setting names. Only left for backwards compatibility - use OptionInfo(..., infotext='...') instead.
 Example content:
@@ -410,12 +410,24 @@ def create_override_settings_dict(text_pairs):
         {'CLIP_stop_at_last_layers': 2, 'sd_model_checkpoint': 'e6e99610c4', 'eta_noise_seed_delta': 31337}
     """
 
-    if text_pairs is None or text_pairs == '':
-        return {}
+    res = {}
 
-    return {
-        'sd_model_checkpoint': text_pairs
-    }
+    params = {}
+    for pair in text_pairs:
+        k, v = pair.split(":", maxsplit=1)
+
+        params[k] = v.strip()
+
+    mapping = [(info.infotext, k) for k, info in shared.opts.data_labels.items() if info.infotext]
+    for param_name, setting_name in mapping + infotext_to_setting_name_mapping:
+        value = params.get(param_name, None)
+
+        if value is None:
+            continue
+
+        res[setting_name] = shared.opts.cast_value(setting_name, value)
+
+    return res
 
 def get_override_settings(params, *, skip_fields=None):
     """Returns a list of settings overrides from the infotext parameters dictionary.
