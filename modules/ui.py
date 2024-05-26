@@ -289,6 +289,8 @@ def create_ui():
 
                 scripts.scripts_txt2img.prepare_ui()
 
+                select_model_settings = create_model_select_dropdown("txt2img", toprow)
+                select_vae_settings = create_vae_select_dropdown("txt2img", toprow)
                 for category in ordered_ui_categories():
                     if category == "prompt":
                         toprow.create_inline_toprow_prompts()
