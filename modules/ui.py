@@ -238,11 +238,11 @@ def ordered_ui_categories():
 
 def create_override_settings_dropdown(tabname, row):
     checkpoints = shared_items.list_checkpoint_tiles(shared.opts.sd_checkpoint_dropdown_use_short)
-    choices = []
-    for ckpt in checkpoints:
-        choices.append(ckpt)
-        
-    dropdown = gr.Dropdown(choices, label="模型选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=False)
+    vaes = shared_items.sd_vae_items()
+
+    with FormRow(elem_id=tabname + '_inner_row') as row:
+        dropdown_checkpoints = gr.Dropdown(checkpoints, label="模型选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=False)
+        dropdown_vae = gr.Dropdown(vaes, label="VAE选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=False)
 
     # dropdown.change(
     #     fn=lambda x: gr.Dropdown.update(visible=bool(x)),
@@ -250,7 +250,7 @@ def create_override_settings_dropdown(tabname, row):
     #     outputs=[dropdown],
     # )
 
-    return dropdown
+    return row
 
 
 def create_ui():
