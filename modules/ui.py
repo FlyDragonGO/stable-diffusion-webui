@@ -545,8 +545,8 @@ def create_ui():
                 scripts.scripts_img2img.prepare_ui()
 
                 with FormRow() as model_row:
-                    model_select_settings_i2i = create_model_select_dropdown("txt2img", model_row)
-                    vae_select_settings_i2i = create_vae_select_dropdown("txt2img", model_row)
+                    model_select_settings_i2i = create_model_select_dropdown("img2img", model_row)
+                    vae_select_settings_i2i = create_vae_select_dropdown("img2img", model_row)
 
                 for category in ordered_ui_categories():
                     if category == "prompt":
