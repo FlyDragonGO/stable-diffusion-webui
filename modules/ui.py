@@ -236,12 +236,22 @@ def ordered_ui_categories():
         yield category
 
 
+def create_model_select_dropdown(tabname, row):
+    checkpoints = shared_items.list_checkpoint_tiles(shared.opts.sd_checkpoint_dropdown_use_short)
+    dropdown = gr.Dropdown(checkpoints, label="模型选择", visible=True, elem_id=f"{tabname}_model_select", multiselect=False)
+    return dropdown
+
+def create_vae_select_dropdown(tabname, row):
+    vaes = shared_items.sd_vae_items()
+    dropdown = gr.Dropdown(vaes, label="VAE选择", visible=True, elem_id=f"{tabname}_vae_select", multiselect=False)
+    return dropdown
+
+
 def create_override_settings_dropdown(tabname, row):
     checkpoints = shared_items.list_checkpoint_tiles(shared.opts.sd_checkpoint_dropdown_use_short)
     vaes = shared_items.sd_vae_items()
 
     with FormRow(elem_id=tabname + '_inner_row') as row:
-        dropdown_checkpoints = gr.Dropdown(checkpoints, label="模型选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=False)
         dropdown_vae = gr.Dropdown(vaes, label="VAE选择", visible=True, elem_id=f"{tabname}_override_settings", multiselect=False)
 
     # dropdown.change(
