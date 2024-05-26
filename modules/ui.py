@@ -544,6 +544,10 @@ def create_ui():
 
                 scripts.scripts_img2img.prepare_ui()
 
+                with FormRow() as model_row:
+                    model_select_settings_i2i = create_model_select_dropdown("txt2img", model_row)
+                    vae_select_settings_i2i = create_vae_select_dropdown("txt2img", model_row)
+
                 for category in ordered_ui_categories():
                     if category == "prompt":
                         toprow.create_inline_toprow_prompts()
@@ -773,8 +777,8 @@ def create_ui():
                     img2img_batch_output_dir,
                     img2img_batch_inpaint_mask_dir,
                     override_settings,
-                    model_select_settings,
-                    vae_select_settings,
+                    model_select_settings_i2i,
+                    vae_select_settings_i2i,
                     img2img_batch_use_png_info,
                     img2img_batch_png_info_props,
                     img2img_batch_png_info_dir,
